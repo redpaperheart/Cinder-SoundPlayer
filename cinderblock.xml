@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cinder>
+  <block
+    name="Cinder-SoundPlayer"
+    id="com.redpaperheart.soundplayer"
+    author="Red Paper Heart"
+    summary="Simple sound player using Cinder's new Audio API."
+    version="1.0"
+    url="https://github.com/redpaperheart/Cinder-SoundPlayer"
+    git="https://github.com/redpaperheart/Cinder-SoundPlayer.git"
+    >
+    <supports os="macosx"/>
+    <supports os="msw"/>
+    <includePath>src</includePath>
+    <header>src/rph/SoundPlayer.h</header>
+    <header>src/rph/SoundManager.h</header>
+    <source>src/rph/SoundPlayer.cpp</source>
+    <source>src/rph/SoundManager.cpp</source>
+  </block>
+</cinder>

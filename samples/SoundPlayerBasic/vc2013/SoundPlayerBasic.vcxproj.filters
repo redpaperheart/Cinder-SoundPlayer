@@ -1,0 +1,61 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Blocks">
+      <UniqueIdentifier>{4F37FF3B-D2E9-416F-905A-7218CF9950D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-SoundPlayer">
+      <UniqueIdentifier>{2060810B-D2D1-4857-AC2E-BAF8D62E3C96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-SoundPlayer\src">
+      <UniqueIdentifier>{F2026D84-59EB-4EB8-8CBA-01CD48F728BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-SoundPlayer\src\rph">
+      <UniqueIdentifier>{A8CF0D89-C86A-4AFB-81CF-479B6918FD8D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\SoundPlayerBasicApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SoundPlayerBasicApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\rph\SoundPlayer.h">
+      <Filter>Blocks\Cinder-SoundPlayer\src\rph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\rph\SoundManager.h">
+      <Filter>Blocks\Cinder-SoundPlayer\src\rph</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\rph\SoundPlayer.cpp">
+      <Filter>Blocks\Cinder-SoundPlayer\src\rph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\rph\SoundManager.cpp">
+      <Filter>Blocks\Cinder-SoundPlayer\src\rph</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
