@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,17 +12,15 @@
 		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
 		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		2078305E1A9F9C1D000FEEF3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2078305D1A9F9C1D000FEEF3 /* AVFoundation.framework */; };
+		207830601A9F9C21000FEEF3 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2078305F1A9F9C21000FEEF3 /* CoreMedia.framework */; };
+		2C4894186916492F9A649593 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD37E8E8A4194E399CED60A0 /* SoundPlayer.cpp */; };
+		42B64892151643BE9DB7CBA5 /* FadeSoundManagerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D01AE1711547D59B7DD7A1 /* FadeSoundManagerApp.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		603EE3CEDC674563914BBCA8 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D2CC48BAF440878429BFF1 /* SoundManager.cpp */; };
-		2C4894186916492F9A649593 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD37E8E8A4194E399CED60A0 /* SoundPlayer.cpp */; };
-		AA8522AC50CF416D98DA5C22 /* SoundManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 69A24A861C9D40028D03F749 /* SoundManager.h */; };
-		66AA4F0C0028456998F481F4 /* SoundPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 692954F54A664453B0523C06 /* SoundPlayer.h */; };
-		DF4BCBE107FC46DEABADC792 /* FadeSoundManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1F834148671044D59133453E /* FadeSoundManager_Prefix.pch */; };
 		5838394E679844249EFC7387 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = F187D6B2AB83434AA34E34A1 /* CinderApp.icns */; };
-		7D765EF84CD84E239AAC7A26 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = 631E058D10474E15BA43621D /* Resources.h */; };
-		42B64892151643BE9DB7CBA5 /* FadeSoundManagerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41D01AE1711547D59B7DD7A1 /* FadeSoundManagerApp.cpp */; };
+		603EE3CEDC674563914BBCA8 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D2CC48BAF440878429BFF1 /* SoundManager.cpp */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,20 +30,22 @@
 		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1F834148671044D59133453E /* FadeSoundManager_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = FadeSoundManager_Prefix.pch; sourceTree = "<group>"; };
+		2078305D1A9F9C1D000FEEF3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2078305F1A9F9C21000FEEF3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		21D2CC48BAF440878429BFF1 /* SoundManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = SoundManager.cpp; path = ../../../src/rph/SoundManager.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		41D01AE1711547D59B7DD7A1 /* FadeSoundManagerApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = FadeSoundManagerApp.cpp; path = ../src/FadeSoundManagerApp.cpp; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		5323E6B50EAFCA7E003A9687 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		631E058D10474E15BA43621D /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		692954F54A664453B0523C06 /* SoundPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundPlayer.h; path = ../../../src/rph/SoundPlayer.h; sourceTree = "<group>"; };
+		69A24A861C9D40028D03F749 /* SoundManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundManager.h; path = ../../../src/rph/SoundManager.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FadeSoundManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FadeSoundManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		41D01AE1711547D59B7DD7A1 /* FadeSoundManagerApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/FadeSoundManagerApp.cpp; sourceTree = "<group>"; name = FadeSoundManagerApp.cpp; };
-		631E058D10474E15BA43621D /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
-		F187D6B2AB83434AA34E34A1 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
-		B26BB8980FC2402B8A67B9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
-		1F834148671044D59133453E /* FadeSoundManager_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = FadeSoundManager_Prefix.pch; sourceTree = "<group>"; name = FadeSoundManager_Prefix.pch; };
-		692954F54A664453B0523C06 /* SoundPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/rph/SoundPlayer.h; sourceTree = "<group>"; name = SoundPlayer.h; };
-		69A24A861C9D40028D03F749 /* SoundManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/rph/SoundManager.h; sourceTree = "<group>"; name = SoundManager.h; };
-		BD37E8E8A4194E399CED60A0 /* SoundPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/rph/SoundPlayer.cpp; sourceTree = "<group>"; name = SoundPlayer.cpp; };
-		21D2CC48BAF440878429BFF1 /* SoundManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/rph/SoundManager.cpp; sourceTree = "<group>"; name = SoundManager.cpp; };
+		B26BB8980FC2402B8A67B9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD37E8E8A4194E399CED60A0 /* SoundPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = SoundPlayer.cpp; path = ../../../src/rph/SoundPlayer.cpp; sourceTree = "<group>"; };
+		F187D6B2AB83434AA34E34A1 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				207830601A9F9C21000FEEF3 /* CoreMedia.framework in Frameworks */,
+				2078305E1A9F9C1D000FEEF3 /* AVFoundation.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
 				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
@@ -67,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				FBEECC6D86AD48FBB2392B05 /* Cinder-SoundPlayer */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,35 @@
 			name = FadeSoundManager;
 			sourceTree = "<group>";
 		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				631E058D10474E15BA43621D /* Resources.h */,
+				1F834148671044D59133453E /* FadeSoundManager_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F187D6B2AB83434AA34E34A1 /* CinderApp.icns */,
+				B26BB8980FC2402B8A67B9A6 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2078305F1A9F9C21000FEEF3 /* CoreMedia.framework */,
+				2078305D1A9F9C1D000FEEF3 /* AVFoundation.framework */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8BC4953631314B40939E1025 /* rph */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,41 +184,6 @@
 				A81CE7F6816A46D9BEAFB43B /* src */,
 			);
 			name = "Cinder-SoundPlayer";
-			sourceTree = "<group>";
-		};
-		01B97315FEAEA392516A2CEA /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				FBEECC6D86AD48FBB2392B05 /* Cinder-SoundPlayer */,
-			);
-			name = Blocks;
-			sourceTree = "<group>";
-		};
-		29B97315FDCFA39411CA2CEA /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				631E058D10474E15BA43621D /* Resources.h */,
-				1F834148671044D59133453E /* FadeSoundManager_Prefix.pch */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		29B97317FDCFA39411CA2CEA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F187D6B2AB83434AA34E34A1 /* CinderApp.icns */,
-				B26BB8980FC2402B8A67B9A6 /* Info.plist */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +212,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FadeSoundManager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -256,24 +262,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FadeSoundManager_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = FadeSoundManager_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
 				PRODUCT_NAME = FadeSoundManager;
-				WRAPPER_EXTENSION = app;
 				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -287,60 +293,54 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FadeSoundManager_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NDEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = FadeSoundManager_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
 				PRODUCT_NAME = FadeSoundManager;
 				STRIP_INSTALLED_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
 				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CINDER_PATH = ../../../../..;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = i386;
-				CINDER_PATH = "../../../../..";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/boost\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(CINDER_PATH)/include\" ../include",
-					../../../src,
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src";
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CINDER_PATH = ../../../../..;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = i386;
-				CINDER_PATH = "../../../../..";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/boost\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(CINDER_PATH)/include\" ../include",
-					../../../src,
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src";
 			};
 			name = Release;
 		};

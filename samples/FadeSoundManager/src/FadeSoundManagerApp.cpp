@@ -1,6 +1,7 @@
 #include "cinder/app/AppNative.h"
-#include "cinder/gl/gl.h"
+#include "cinder/app/RendererGl.h"
 #include "cinder/params/Params.h"
+
 #include "rph/SoundPlayer.h"
 #include "rph/SoundManager.h"
 
@@ -15,7 +16,6 @@ using namespace std;
 class FadeSoundManagerApp : public AppNative {
   public:
 	void setup();
-	void update();
 	void draw();
     void playNextSong(string key);
     
@@ -38,7 +38,7 @@ void FadeSoundManagerApp::setup()
     mFadeTime = 4.0;
     
     // Create buttons for playback
-    mParams = params::InterfaceGl::create("Loops", Vec2f(200, 160));
+    mParams = params::InterfaceGl::create("Loops", vec2(200, 160));
     mParams->addButton("Play Ethereal", std::bind(&FadeSoundManagerApp::playNextSong, this, SOUND_SYNTH));
     mParams->addButton("Play Jazz", std::bind(&FadeSoundManagerApp::playNextSong, this, SOUND_JAZZ));
     mParams->addButton("Play 8Bit", std::bind(&FadeSoundManagerApp::playNextSong, this, SOUND_8BIT));
@@ -57,10 +57,6 @@ void FadeSoundManagerApp::playNextSong(string key)
 
     // Save current song
     mCurrentSongName = key;
-}
-
-void FadeSoundManagerApp::update()
-{
 }
 
 void FadeSoundManagerApp::draw()

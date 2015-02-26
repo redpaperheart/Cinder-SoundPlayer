@@ -1,5 +1,5 @@
 #include "cinder/app/AppNative.h"
-#include "cinder/gl/gl.h"
+#include "cinder/app/RendererGl.h"
 #include "cinder/params/Params.h"
 #include "rph/SoundPlayer.h"
 
@@ -32,7 +32,7 @@ void SoundPlayerBasicApp::setup()
     mPan = 0.0;
     
     // Create buttons for playback
-    mParams = params::InterfaceGl::create("SoundPlayer", Vec2f(160, 160));
+    mParams = params::InterfaceGl::create("SoundPlayer", ivec2(160, 160));
     mParams->addButton("Play", std::bind(&rph::SoundPlayer::play, mSound));     // mSound.play()
     mParams->addButton("Pause", std::bind(&rph::SoundPlayer::pause, mSound));   // mSound.pause()
     mParams->addButton("Stop", std::bind(&rph::SoundPlayer::stop, mSound));     // mSound.stop()
