@@ -34,6 +34,7 @@
  *
  */
 
+#include "cinder/Rand.h"
 #include "rph/SoundManager.h"
 
 namespace rph {
@@ -56,13 +57,39 @@ namespace rph {
     SoundPlayerRef SoundManager::loadSound( std::string key, std::string path )
     {
         try {
-            mSounds[key] = SoundPlayer::create(cinder::app::loadAsset(path)); // use next line instead for resources
-            // mSounds[key] = SoundPlayer::create(ci::app::loadResource(path));
-            return mSounds[key];
+            SoundPlayerRef sound = SoundPlayer::create(ci::app::loadAsset(path)); // use next line instead for resources
+            //SoundPlayerRef sound = SoundPlayer::create(ci::app::loadResource(path));
+            
+            if (getNumSounds(key) == 0) mSounds[key] = { sound };
+            else                        mSounds[key].push_back(sound);
+
+            return sound;
         }
         catch(...) {
             cinder::app::console() << "SoundManager::loadSound FAILED: " << path << std::endl;
             return NULL;
         }
     }
+    
+    SoundPlayerRef SoundManager::getSound( std::string key )
+    {
+        int numSounds = getNumSounds(key);
+
+        if (numSounds == 0) {
+            return nullptr;
+        }
+        else if (numSounds == 1) {
+            return mSounds.at(key).back();
+        }
+        else {
+            return mSounds.at(key).at(randInt(numSounds));
+        }
+    }
+    
+    int SoundManager::getNumSounds(std::string key)
+    {
+        if (mSounds.count(key) == 0) return 0;
+        else return mSounds.at(key).size();
+    }
+
 }

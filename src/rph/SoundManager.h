@@ -44,9 +44,10 @@ namespace rph {
     public:
         static SoundManager* getInstance();
         
-        SoundPlayerRef loadSound( std::string path);
+        SoundPlayerRef loadSound( std::string path );
         SoundPlayerRef loadSound( std::string key, std::string path );
-        SoundPlayerRef getSound( std::string key ) { return mSounds[key]; };
+        SoundPlayerRef getSound( std::string key );
+        int getNumSounds( std::string key );
         
     protected:
         SoundManager(){};                                                    // Private so that it can  not be called
@@ -54,7 +55,7 @@ namespace rph {
         SoundManager& operator=(SoundManager const&){return *mInstance;};    // assignment operator is private
         static SoundManager* mInstance;
 
-        std::map<std::string, SoundPlayerRef>  mSounds;
+        std::map<std::string, std::vector<SoundPlayerRef>>  mSounds;
     };
 }
 
