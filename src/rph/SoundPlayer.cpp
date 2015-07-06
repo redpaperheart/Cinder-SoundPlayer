@@ -90,7 +90,7 @@ namespace rph {
         
         // There's no thread safe callbacks from audio ramps yet, so we just hack it with timeline
         mStopTimer.stop();
-        cinder::app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(boost::bind(&SoundPlayer::stop, this));
+        cinder::app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(std::bind(&SoundPlayer::stop, this));
     }
     
     void SoundPlayer::fadeOutAndPause(float seconds)
@@ -99,7 +99,7 @@ namespace rph {
         
         // There's no thread safe callbacks from audio ramps yet, so we just hack it with timeline
         mStopTimer.stop();
-        cinder::app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(boost::bind(&SoundPlayer::pause, this));
+        cinder::app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(std::bind(&SoundPlayer::pause, this));
     }
     
     void SoundPlayer::fade(float from, float to, float seconds, float delay)

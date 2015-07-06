@@ -12,6 +12,7 @@
 		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
 		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		204DA0481B24147D00E6ED5A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204DA0471B24147D00E6ED5A /* IOKit.framework */; };
 		2078305E1A9F9C1D000FEEF3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2078305D1A9F9C1D000FEEF3 /* AVFoundation.framework */; };
 		207830601A9F9C21000FEEF3 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2078305F1A9F9C21000FEEF3 /* CoreMedia.framework */; };
 		2C4894186916492F9A649593 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD37E8E8A4194E399CED60A0 /* SoundPlayer.cpp */; };
@@ -31,6 +32,7 @@
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		1F834148671044D59133453E /* FadeSoundManager_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = FadeSoundManager_Prefix.pch; sourceTree = "<group>"; };
+		204DA0471B24147D00E6ED5A /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		2078305D1A9F9C1D000FEEF3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2078305F1A9F9C21000FEEF3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		21D2CC48BAF440878429BFF1 /* SoundManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = SoundManager.cpp; path = ../../../src/rph/SoundManager.cpp; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204DA0481B24147D00E6ED5A /* IOKit.framework in Frameworks */,
 				207830601A9F9C21000FEEF3 /* CoreMedia.framework in Frameworks */,
 				2078305E1A9F9C1D000FEEF3 /* AVFoundation.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -151,6 +154,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				204DA0471B24147D00E6ED5A /* IOKit.framework */,
 				2078305F1A9F9C21000FEEF3 /* CoreMedia.framework */,
 				2078305D1A9F9C1D000FEEF3 /* AVFoundation.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
@@ -320,7 +324,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/boost\"";
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src";
@@ -337,7 +341,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/boost\"";
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src";

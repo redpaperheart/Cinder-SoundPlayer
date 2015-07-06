@@ -36,7 +36,7 @@
 
 #pragma once
 
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/audio/SamplePlayerNode.h"
 #include "cinder/audio/GainNode.h"
 #include "cinder/audio/PanNode.h"

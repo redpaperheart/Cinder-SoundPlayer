@@ -1,4 +1,4 @@
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/params/Params.h"
 #include "rph/SoundPlayer.h"
@@ -7,7 +7,7 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-class SoundPlayerBasicApp : public AppNative {
+class SoundPlayerBasicApp : public App {
 public:
     void setup();
     void draw();
@@ -78,4 +78,4 @@ void SoundPlayerBasicApp::draw()
     mParams->draw();
 }
 
-CINDER_APP_NATIVE( SoundPlayerBasicApp, RendererGl )
+CINDER_APP( SoundPlayerBasicApp, RendererGl )

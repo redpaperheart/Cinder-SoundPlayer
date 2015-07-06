@@ -1,4 +1,4 @@
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/params/Params.h"
 
@@ -13,7 +13,7 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-class FadeSoundManagerApp : public AppNative {
+class FadeSoundManagerApp : public App {
   public:
 	void setup();
 	void draw();
@@ -65,4 +65,4 @@ void FadeSoundManagerApp::draw()
     mParams->draw();
 }
 
-CINDER_APP_NATIVE( FadeSoundManagerApp, RendererGl )
+CINDER_APP( FadeSoundManagerApp, RendererGl )
