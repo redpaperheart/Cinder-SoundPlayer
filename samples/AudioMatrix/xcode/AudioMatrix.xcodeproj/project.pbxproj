@@ -16,12 +16,12 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		20C34B4E1B556E3500A59B10 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20C34B4C1B556E3500A59B10 /* Cell.cpp */; };
 		300A856CB2824223B7D00AC7 /* AudioMatrixApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29C318719C264908AB946DA4 /* AudioMatrixApp.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		800D73C767EE42EC8968CF66 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2586E117F17418E9E05F3FF /* SoundPlayer.cpp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		E936E7D91B4B126200E7E134 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = E936E7D81B4B126200E7E134 /* assets */; };
-		E9CBDB461B555C13009AB760 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9CBDB441B555C13009AB760 /* Cell.cpp */; };
 		ED828FD33F574D78B061F7B9 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AEFB96ED7F43B89F2A7A88 /* SoundManager.cpp */; };
 		FA896BC54F3D4DCC9BCBCF88 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = D522956C1AE3430ABB50FC7E /* CinderApp.icns */; };
 /* End PBXBuildFile section */
@@ -39,6 +39,8 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		1CCE3DAE8C2948CB97123B43 /* SoundManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundManager.h; path = "../blocks/Cinder-SoundPlayer/src/rph/SoundManager.h"; sourceTree = "<group>"; };
 		1D18DFBB35E8446C9306CDE0 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		20C34B4C1B556E3500A59B10 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Cell.cpp; path = ../src/Cell.cpp; sourceTree = "<group>"; };
+		20C34B4D1B556E3500A59B10 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cell.h; path = ../src/Cell.h; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		29C318719C264908AB946DA4 /* AudioMatrixApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = AudioMatrixApp.cpp; path = ../src/AudioMatrixApp.cpp; sourceTree = "<group>"; };
@@ -50,8 +52,6 @@
 		D522956C1AE3430ABB50FC7E /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
 		E2586E117F17418E9E05F3FF /* SoundPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = SoundPlayer.cpp; path = "../blocks/Cinder-SoundPlayer/src/rph/SoundPlayer.cpp"; sourceTree = "<group>"; };
 		E936E7D81B4B126200E7E134 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
-		E9CBDB441B555C13009AB760 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
-		E9CBDB451B555C13009AB760 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		EEF6DBB4F748423E844799D5 /* SoundPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SoundPlayer.h; path = "../blocks/Cinder-SoundPlayer/src/rph/SoundPlayer.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,8 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				29C318719C264908AB946DA4 /* AudioMatrixApp.cpp */,
-				E9CBDB441B555C13009AB760 /* Cell.cpp */,
-				E9CBDB451B555C13009AB760 /* Cell.h */,
+				20C34B4D1B556E3500A59B10 /* Cell.h */,
+				20C34B4C1B556E3500A59B10 /* Cell.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				300A856CB2824223B7D00AC7 /* AudioMatrixApp.cpp in Sources */,
-				E9CBDB461B555C13009AB760 /* Cell.cpp in Sources */,
+				20C34B4E1B556E3500A59B10 /* Cell.cpp in Sources */,
 				800D73C767EE42EC8968CF66 /* SoundPlayer.cpp in Sources */,
 				ED828FD33F574D78B061F7B9 /* SoundManager.cpp in Sources */,
 			);
