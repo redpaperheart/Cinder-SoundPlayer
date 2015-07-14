@@ -27,11 +27,6 @@ class AudioMatrixApp : public App {
     void audioOn(int y, int x);
     void audioOff(int x, int y);
     
-    float mFrameSpeed = 3.0f;
-    float mFramUpdateTime = 1.0f/mFrameSpeed;
-    float mColWidth = mGridWidth/mColumn;
-    float mRowHeight = mGridHeight/mRow;
-    
     bool setState = false;
     
     int mRow = 4;
@@ -41,6 +36,11 @@ class AudioMatrixApp : public App {
     int mGridWidth = getWindowWidth()-(mGridLeft*2);
     int mGridHeight = getWindowHeight()-(mGridTop*2);
     int curColumn = -1;
+    
+    float mFrameSpeed = 3.0f;
+    float mFramUpdateTime = 1.0f/mFrameSpeed;
+    float mColWidth = mGridWidth/mColumn;
+    float mRowHeight = mGridHeight/mRow;
     
     std::map < int, std::vector<rph::SoundPlayerRef>> mSounds;
     
@@ -62,7 +62,7 @@ void AudioMatrixApp::setup()
     // position the cells
     for (int x = 0; x<mColumn; x++) {
         for (int y = 0 ; y< mRow; y++) {
-            mGrid[x][y] = Cell(x,y);
+            mGrid[x][y].setup(x, y);
         }
     }
 }
@@ -78,7 +78,6 @@ void AudioMatrixApp::loadSounds()
             std::string fileName = jsonFile["audio"][i]["files"][j]["filename"].getValue<std::string>();
             rph::SoundPlayerRef soundPlayer = rph::SoundPlayer::create( loadAsset(fileName));
             mSounds[ index ].push_back(soundPlayer);
-           
         }
     }
 }
@@ -112,10 +111,8 @@ void AudioMatrixApp::mouseDrag( MouseEvent event )
     int mX = lmap(int(mCurrentPos.x ), 0, mGridWidth-15, 0, mColumn);
     int mY = lmap(int(mCurrentPos.y ), 0, mGridHeight-15, 0, mRow);
     if(mX >= 0 && mX < mColumn && mY >= 0 && mY < mRow){
-
         mGrid[mX][mY].mState = setState;
         mGrid[mX][mY].mSelected = setState;
-
     }
 }
 
@@ -158,6 +155,7 @@ void AudioMatrixApp::draw()
         }
     }
 }
+
 
 CINDER_APP( AudioMatrixApp, RendererGl(), [&]( App::Settings *settings ) {
     settings->setWindowSize( 640, 440 );
