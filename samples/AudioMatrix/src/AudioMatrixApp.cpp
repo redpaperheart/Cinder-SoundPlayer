@@ -1,11 +1,12 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Json.h"
+#include "cinder/Rand.h"
+
 #include "rph/SoundPlayer.h"
 #include "rph/SoundManager.h"
-#include "cinder/audio/Context.h"
-#include "cinder/Json.h"
-#include "cinder/Timer.h"
+
 #include "Cell.h"
 
 using namespace ci;
@@ -15,161 +16,168 @@ using namespace std;
 
 class AudioMatrixApp : public App {
   public:
-    AudioMatrixApp(){};
-    
 	void setup() override;
-	void mouseDown( MouseEvent event ) override;
+    void draw() override;
+    void resize() override;
+    void mouseMove( MouseEvent event ) override;
+    void mouseDown( MouseEvent event ) override;
     void mouseDrag( MouseEvent event) override;
-	void update() override;
-	void draw() override;
-    
-    void nextStep();
+    void keyDown( KeyEvent event) override;
     
     void loadSounds();
-    void audioOn(int y, int x);
-    void audioOff(int x, int y);
-    float getColWidth();
-    float getRowHeight();
-    float mFrameSpeed = 3.0f;
-    float mFramUpdateTime = 1.0f/mFrameSpeed;
+    void nextStep();
+    void checkCell(ivec2 pos, bool toggle);
     
-    std::map < int, std::vector<rph::SoundPlayerRef>> mSounds;
-    int mRow = 4;
-    int mColumn = 6;
-    int mGridTop = 20;
-    int mGridLeft = 20;
-    int mGridWidth = getWindowWidth()-(mGridLeft*2);
-    int mGridHeight = getWindowHeight()-(mGridTop*2);
+    int mRows = 4;
+    int mCols = 6;
     int curColumn = -1;
+    float mCellPadding = 10;
+    float mGridMargin = 20;
+    float mCellSize;
     
-    float mColWidth = mGridWidth/mColumn;
-    float mRowHeight = mGridHeight/mRow;
-    
-    bool setState = false;
-    
+    Rectf mGridRect;
     CueRef mCue;
     
+    Cell* mCurCell;
     Cell mGrid[6][4];
-
+    std::map < int, std::vector<rph::SoundPlayerRef>> mSounds;
+    
 };
 
 void AudioMatrixApp::setup()
 {
+    Rand::randomize();
+    gl::enableVerticalSync(false);
+    
     loadSounds();
-    mCue = timeline().add( bind(&AudioMatrixApp::nextStep, this), timeline().getCurrentTime() + 1 );
-    mCue->setDuration( 0.7 );
+    
+    // initialize cells and enable some randomnly
+    for (int x = 0; x < mCols; x++) {
+        for (int y = 0; y < mRows; y++) {
+            mGrid[x][y].setup(x, y);
+            
+            if (randFloat() < 0.15)
+                mGrid[x][y].enable(true);
+        }
+    }
+    
+    // setup sequencer loop
+    mCue = timeline().add( bind(&AudioMatrixApp::nextStep, this), timeline().getCurrentTime() );
+    mCue->setDuration( 0.5 );
     mCue->setAutoRemove( false );
     mCue->setLoop();
-    
-    for (int x = 0; x<mColumn; x++) {
-        for (int y = 0 ; y< mRow; y++) {
-            mGrid[x][y] = *new Cell(x,y);
-        }
-    }
 }
 
-void AudioMatrixApp::loadSounds(){
-    mSounds.clear();
-    JsonTree jsonFile = JsonTree( loadAsset( "audioMatrix.json" ));
-    for(int i = 0; i < jsonFile["audio"].getNumChildren(); i++){
-        int index = jsonFile["audio"][i]["index"].getValue<int>();
-        
-        for(int j = 0; j < jsonFile["audio"][ci::toString(i)]["files"].getNumChildren(); j++){
-            std::string fileName = jsonFile["audio"][i]["files"][j]["filename"].getValue<std::string>();
-            rph::SoundPlayerRef soundPlayer = rph::SoundPlayer::create( loadAsset(fileName));
-            mSounds[ index ].push_back(soundPlayer);
-           
-        }
-    }
-    
-}
-
-void AudioMatrixApp::audioOn(int y, int x){
-    mSounds[y][x]->start();
-}
-
-void AudioMatrixApp::audioOff(int x, int y){
-    mSounds[x][y]->stop();
-}
-
-
-
-void AudioMatrixApp::mouseDown( MouseEvent event )
+void AudioMatrixApp::loadSounds()
 {
-
-    vec2 mCurrentPos = event.getPos();
-    int mX = lmap(int(mCurrentPos.x - mGridLeft), 0, mGridWidth, 0, mColumn);
-    int mY = lmap(int(mCurrentPos.y - mGridTop),0, mGridHeight, 0, mRow);
-    if(mX >= 0 && mX < mColumn && mY >= 0 && mY < mRow){
-        setState = ! mGrid[mX][mY].mState;
-        mGrid[mX][mY].mState = setState;
-        mGrid[mX][mY].mSelected = setState;
-
-    }
+    JsonTree jsonFile = JsonTree( loadAsset( "audioMatrix.json" ));
     
-}
-
-
-void AudioMatrixApp::mouseDrag( MouseEvent event ){
-    vec2 mCurrentPos = event.getPos();
-    int mX = lmap(int(mCurrentPos.x ), 0, mGridWidth-15, 0, mColumn);
-    int mY = lmap(int(mCurrentPos.y ), 0, mGridHeight-15, 0, mRow);
-    if(mX >= 0 && mX < mColumn && mY >= 0 && mY < mRow){
-
-        mGrid[mX][mY].mState = setState;
-        mGrid[mX][mY].mSelected = setState;
-
-    }
-    
-    
-}
-
-void AudioMatrixApp::nextStep(){
-    curColumn = (curColumn +1) % mColumn;
-//    int lastColumn = (curColumn + mColumn-1) % mColumn;
-    
-    for (int x = 0; x<mColumn;x++) {
-        for (int y = 0 ; y< mRow;y++) {
+    for (JsonTree row : jsonFile["audio"].getChildren()) {
+        int index = row["index"].getValue<int>();
+        
+        for (JsonTree file : row["files"].getChildren()) {
+            std::string fileName = file["filename"].getValue<std::string>();
+            float volume = file["volume"].getValue<float>();
             
-            if (mGrid[x][y].mX == curColumn) {
-                mGrid[x][y].sliderOn();
-                if (mGrid[x][y].mState) {
-                    mGrid[x][y].cellOn();
-                    audioOn(y, x);
+            rph::SoundPlayerRef soundPlayer = rph::SoundPlayer::create(loadAsset(fileName));
+            soundPlayer->setVolume(volume);
+            mSounds[index].push_back(soundPlayer);
+        }
+    }
+}
+
+void AudioMatrixApp::nextStep()
+{
+    curColumn = (curColumn +1) % mCols;
+    
+    for (int x = 0; x < mCols; x++) {
+        for (int y = 0 ; y < mRows; y++) {
+            
+            if (x == curColumn) {
+                mGrid[x][y].setPlayhead(true);
+                
+                if (mGrid[x][y].isEnabled()) {
+                    mSounds[y][x]->start();
                 }
             }
             else{
-                mGrid[x][y].sliderOff();
-                mGrid[x][y].cellOff();
-            
+                mGrid[x][y].setPlayhead(false);
             }
         }
     }
 }
 
-void AudioMatrixApp::update()
-{
-}
-
-
-
 void AudioMatrixApp::draw()
 {
+	gl::clear(Color(1,1,1));
     
-	gl::clear( Color(1,1,1));
-    
-    for (int x = 0; x<mColumn;x++) {
-        for (int y = 0 ; y< mRow;y++) {
-            Cell cell = mGrid[x][y];
-            cell.draw(mColWidth, mRowHeight, mGridTop, mGridLeft);
+    for (int x = 0; x < mCols; x++) {
+        for (int y = 0 ; y < mRows; y++) {
+            mGrid[x][y].draw(mCellSize, mCellPadding, mGridRect.getUpperLeft());
         }
     }
 }
 
+void AudioMatrixApp::resize()
+{
+    Rectf minRect = Rectf(0, 0, mCols, mRows);
+    mGridRect = minRect.getCenteredFit(Rectf(getWindowBounds()).inflated(ivec2(-mGridMargin)), true);
+    mCellSize = mGridRect.getWidth() / mCols;
+    mCellPadding = mCellSize * 0.1;
+}
 
+void AudioMatrixApp::mouseMove( MouseEvent event )
+{
+    checkCell(event.getPos(), false);
+}
+
+void AudioMatrixApp::mouseDown( MouseEvent event )
+{
+    if (mCurCell) mCurCell->toggle();
+}
+
+void AudioMatrixApp::mouseDrag( MouseEvent event )
+{
+    checkCell(event.getPos(), true);
+}
+
+void AudioMatrixApp::checkCell(ivec2 pos, bool toggle)
+{
+    if (mGridRect.contains(pos)) {
+        
+        // doesn't account for padding
+        int x = lmap(pos.x, (int)mGridRect.getX1(), (int)mGridRect.getX2(), 0, mCols);
+        int y = lmap(pos.y, (int)mGridRect.getY1(), (int)mGridRect.getY2(), 0, mRows);
+        Cell* cell = &mGrid[x][y];
+        
+        if (mCurCell != cell) {
+            if (mCurCell) mCurCell->setSelected(false);
+            mCurCell = cell;
+            mCurCell->setSelected(true);
+            if (toggle) mCurCell->toggle();
+        }
+    }
+    else if (mCurCell) {
+        mCurCell->setSelected(false);
+        mCurCell = nullptr;
+    }
+}
+
+void AudioMatrixApp::keyDown( KeyEvent event )
+{
+    switch (event.getCode()) {
+        case KeyEvent::KEY_RIGHT:
+            mCue->setDuration(mCue->getDuration() + 0.05f);
+            break;
+        case KeyEvent::KEY_LEFT:
+            mCue->setDuration(std::max(mCue->getDuration() - 0.05f, 0.05f));
+            break;
+        default:
+            break;
+    }
+}
 
 CINDER_APP( AudioMatrixApp, RendererGl(), [&]( App::Settings *settings ) {
     settings->setWindowSize( 640, 440 );
-    settings->setFrameRate(60);
-
+    settings->disableFrameRate();
 })
