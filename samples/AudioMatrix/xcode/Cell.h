@@ -20,6 +20,7 @@ public:
     bool mSelected;
     bool bSlider;
     
+    
     Cell(){};
     
     Cell(int x, int y ){

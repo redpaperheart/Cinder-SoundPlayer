@@ -15,8 +15,6 @@ using namespace std;
 
 class AudioMatrixApp : public App {
   public:
-    AudioMatrixApp(){};
-    
 	void setup() override;
 	void mouseDown( MouseEvent event ) override;
     void mouseDrag( MouseEvent event) override;
@@ -28,12 +26,14 @@ class AudioMatrixApp : public App {
     void loadSounds();
     void audioOn(int y, int x);
     void audioOff(int x, int y);
-    float getColWidth();
-    float getRowHeight();
+    
     float mFrameSpeed = 3.0f;
     float mFramUpdateTime = 1.0f/mFrameSpeed;
+    float mColWidth = mGridWidth/mColumn;
+    float mRowHeight = mGridHeight/mRow;
     
-    std::map < int, std::vector<rph::SoundPlayerRef>> mSounds;
+    bool setState = false;
+    
     int mRow = 4;
     int mColumn = 6;
     int mGridTop = 20;
@@ -42,33 +42,33 @@ class AudioMatrixApp : public App {
     int mGridHeight = getWindowHeight()-(mGridTop*2);
     int curColumn = -1;
     
-    float mColWidth = mGridWidth/mColumn;
-    float mRowHeight = mGridHeight/mRow;
-    
-    bool setState = false;
+    std::map < int, std::vector<rph::SoundPlayerRef>> mSounds;
     
     CueRef mCue;
     
     Cell mGrid[6][4];
-
 };
 
 void AudioMatrixApp::setup()
 {
     loadSounds();
+    
+    // setup sequencer loop
     mCue = timeline().add( bind(&AudioMatrixApp::nextStep, this), timeline().getCurrentTime() + 1 );
     mCue->setDuration( 0.7 );
     mCue->setAutoRemove( false );
     mCue->setLoop();
     
+    // position the cells
     for (int x = 0; x<mColumn; x++) {
         for (int y = 0 ; y< mRow; y++) {
-            mGrid[x][y] = *new Cell(x,y);
+            mGrid[x][y] = Cell(x,y);
         }
     }
 }
 
-void AudioMatrixApp::loadSounds(){
+void AudioMatrixApp::loadSounds()
+{
     mSounds.clear();
     JsonTree jsonFile = JsonTree( loadAsset( "audioMatrix.json" ));
     for(int i = 0; i < jsonFile["audio"].getNumChildren(); i++){
@@ -81,36 +81,33 @@ void AudioMatrixApp::loadSounds(){
            
         }
     }
-    
 }
 
-void AudioMatrixApp::audioOn(int y, int x){
+void AudioMatrixApp::audioOn(int y, int x)
+{
     mSounds[y][x]->start();
 }
 
-void AudioMatrixApp::audioOff(int x, int y){
+void AudioMatrixApp::audioOff(int x, int y)
+{
     mSounds[x][y]->stop();
 }
 
-
-
 void AudioMatrixApp::mouseDown( MouseEvent event )
 {
-
     vec2 mCurrentPos = event.getPos();
     int mX = lmap(int(mCurrentPos.x - mGridLeft), 0, mGridWidth, 0, mColumn);
     int mY = lmap(int(mCurrentPos.y - mGridTop),0, mGridHeight, 0, mRow);
+    
     if(mX >= 0 && mX < mColumn && mY >= 0 && mY < mRow){
         setState = ! mGrid[mX][mY].mState;
         mGrid[mX][mY].mState = setState;
         mGrid[mX][mY].mSelected = setState;
-
     }
-    
 }
 
-
-void AudioMatrixApp::mouseDrag( MouseEvent event ){
+void AudioMatrixApp::mouseDrag( MouseEvent event )
+{
     vec2 mCurrentPos = event.getPos();
     int mX = lmap(int(mCurrentPos.x ), 0, mGridWidth-15, 0, mColumn);
     int mY = lmap(int(mCurrentPos.y ), 0, mGridHeight-15, 0, mRow);
@@ -120,11 +117,10 @@ void AudioMatrixApp::mouseDrag( MouseEvent event ){
         mGrid[mX][mY].mSelected = setState;
 
     }
-    
-    
 }
 
-void AudioMatrixApp::nextStep(){
+void AudioMatrixApp::nextStep()
+{
     curColumn = (curColumn +1) % mColumn;
 //    int lastColumn = (curColumn + mColumn-1) % mColumn;
     
@@ -151,11 +147,8 @@ void AudioMatrixApp::update()
 {
 }
 
-
-
 void AudioMatrixApp::draw()
 {
-    
 	gl::clear( Color(1,1,1));
     
     for (int x = 0; x<mColumn;x++) {
@@ -165,8 +158,6 @@ void AudioMatrixApp::draw()
         }
     }
 }
-
-
 
 CINDER_APP( AudioMatrixApp, RendererGl(), [&]( App::Settings *settings ) {
     settings->setWindowSize( 640, 440 );
