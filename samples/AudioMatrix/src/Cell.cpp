@@ -44,7 +44,7 @@ void Cell::sliderOff(){
 
 void Cell::draw(int colWidth, int rowHeight, int gridTop, int gridLeft)
 {
-    Rectf rect( colWidth*mX + gridLeft, rowHeight*mY + gridTop, colWidth*mX + gridLeft+colWidth-15,  rowHeight*mY + gridTop+rowHeight-15 );
+    Rectf rect( colWidth*mX + gridLeft, rowHeight*mY + gridTop, colWidth*mX + gridLeft+colWidth-10,  rowHeight*mY + gridTop+rowHeight-10 );
     
     if (mAudioOn){
         gl::color(sColorAudioOn);
