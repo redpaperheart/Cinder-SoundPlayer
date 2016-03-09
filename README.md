@@ -1,7 +1,7 @@
 Cinder-SoundPlayer
 ==================
 
-Simple class to load and play sounds using Cinder's 0.8.6 new audio API. Features commonly needed functionality like fading volume in and out, panning and moving the playhead to a certain time or percent. The block also includes the utility class SoundManager to easily keep track of all the audio assets in the application.
+Simple class to load and play sounds using [Cinder](https://libcinder.org/)'s 0.9.0 audio API. Features commonly needed functionality like fading volume in and out, panning and moving the playhead to a certain time or percent. The block also includes the utility class SoundManager to easily keep track of all the audio assets in the application.
 
 Includes two samples.
 

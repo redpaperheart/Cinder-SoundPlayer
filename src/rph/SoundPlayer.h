@@ -57,8 +57,8 @@ namespace rph {
         ~SoundPlayer() {};
 
         // playback
-        void play()                                             { mPlayer->enable(); }      // plays from beginning
-        void start()                                            { mPlayer->start(); }       // plays from wherever it was
+        void play()                                             { mPlayer->enable(); }      // plays from wherever it was
+        void start()                                            { mPlayer->start(); }       // plays from beginning
         void stop()                                             { mPlayer->stop(); }
         void pause()                                            { mPlayer->disable(); }     // TODO: stop timers and deal with ramps
         void setLoop(bool loop)                                 { mPlayer->setLoopEnabled(loop); }
