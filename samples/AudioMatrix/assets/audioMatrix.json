@@ -1,0 +1,53 @@
+{
+    "audio":[
+    {
+		"index":"0",
+		"files":[
+			{"filename":"sounds/Ring_1_Ton_1.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_1_Ton_2.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_1_Ton_3.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_2_Ton_1.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_2_Ton_2.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_2_Ton_3.mp3", "volume":"1.0"}
+		]
+	},
+	{
+		"index":"1",
+		"files":[
+
+			{"filename":"sounds/Ring_3_Ton_1.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_3_Ton_2.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_3_Ton_3.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_4_Ton_1.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_4_Ton_2.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_4_Ton_3.mp3", "volume":"1.0"}
+		]
+	},
+	{
+		"index":"2",
+		"files":[
+
+			{"filename":"sounds/Ring_5_Ton_1.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_5_Ton_2.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_5_Ton_3.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_6_Ton_1.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_6_Ton_2.mp3", "volume":"1.0"},
+			{"filename":"sounds/Ring_6_Ton_3.mp3", "volume":"1.0"}
+
+		]
+	},
+	{
+		"index":"3",
+		"files":[
+
+			{"filename":"sounds/Tap-1.aif", "volume":"0.5"},
+			{"filename":"sounds/Tap-2.aif", "volume":"0.5"},
+			{"filename":"sounds/Tap-3.aif", "volume":"0.5"},
+			{"filename":"sounds/Tap-4.aif", "volume":"0.5"},
+			{"filename":"sounds/Tap-5.aif", "volume":"0.5"},
+			{"filename":"sounds/Tap-6.aif", "volume":"0.5"}
+
+		]
+	}
+    ]
+}
