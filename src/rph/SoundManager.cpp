@@ -35,6 +35,7 @@
  */
 
 #include "cinder/Rand.h"
+#include "cinder/Log.h"
 #include "rph/SoundManager.h"
 
 namespace rph {
@@ -65,8 +66,8 @@ namespace rph {
 
             return sound;
         }
-        catch(...) {
-            cinder::app::console() << "SoundManager::loadSound FAILED: " << path << std::endl;
+        catch( std::exception &exc ) {
+            CI_LOG_EXCEPTION( "Failed to load sound with key: " << key << ", path: " << path, exc );
             return NULL;
         }
     }
