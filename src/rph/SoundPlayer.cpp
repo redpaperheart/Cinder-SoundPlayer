@@ -109,7 +109,6 @@ namespace rph {
     
     void SoundPlayer::pan(float from, float to, float seconds)
     {
-        // no getParam in Pan node?
-        // mPan->getParam()->applyRamp(from, pos, seconds);
+        mPan->getParamPos()->applyRamp(from, to, seconds);
     }
 }
