@@ -58,7 +58,8 @@ namespace rph {
     SoundPlayerRef SoundManager::loadSound( std::string key, std::string path )
     {
         try {
-            SoundPlayerRef sound = SoundPlayer::create(ci::app::loadAsset(path)); // use next line instead for resources
+            const float maxFramesForBufferPlayback = 44100 * 10; // TODO: provide getters and setters for this, or pass in via loadSound() options of some sort.
+            SoundPlayerRef sound = SoundPlayer::create(ci::app::loadAsset(path), maxFramesForBufferPlayback); // use next line instead for resources
             //SoundPlayerRef sound = SoundPlayer::create(ci::app::loadResource(path));
             
             if (getNumSounds(key) == 0) mSounds[key] = { sound };
