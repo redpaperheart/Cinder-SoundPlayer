@@ -50,14 +50,22 @@ namespace rph {
     {
         SourceFileRef sourceFile = audio::load(source);
         Context *ctx = Context::master();
-        
+        std::string label;
+
         // Load source file in memory or stream from file depending on its size
         if (sourceFile->getNumFrames() <= maxFramesForBufferPlayback) {
             mPlayer = ctx->makeNode(new BufferPlayerNode(sourceFile->loadBuffer()));
+            label += "BufferPlayerNode";
         }
         else {
             mPlayer = ctx->makeNode(new FilePlayerNode(sourceFile));
+            label += "FilePlayerNode";
         }
+
+        if( ! source->getFilePath().empty() )
+            label += " (" + source->getFilePath().filename().string() + ")"; // note: when the windows compiler is upgraded to v140, you'll have to remove the .string() here.
+
+        mPlayer->setName( label );
         
         // Create gain and other nodes
         mGain = ctx->makeNode(new GainNode());
