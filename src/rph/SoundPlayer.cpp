@@ -48,9 +48,9 @@ namespace rph {
 
     SoundPlayer::SoundPlayer(const DataSourceRef &source, size_t maxFramesForBufferPlayback)
     {
-        SourceFileRef sourceFile = audio::load(source);
         Context *ctx = Context::master();
-        std::string label;
+        SourceFileRef sourceFile = audio::load(source, ctx->getSampleRate());
+        std::string label; 
 
         // Load source file in memory or stream from file depending on its size
         if (sourceFile->getNumFrames() <= maxFramesForBufferPlayback) {
