@@ -48,6 +48,8 @@ namespace rph {
         SoundPlayerRef loadSound( std::string key, std::string path );
         SoundPlayerRef getSound( std::string key );
         int getNumSounds( std::string key );
+
+        std::string printSoundsToString() const;
         
     protected:
         SoundManager(){};                                                    // Private so that it can  not be called

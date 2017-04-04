@@ -94,4 +94,44 @@ namespace rph {
         else return mSounds.at(key).size();
     }
 
+    std::string SoundManager::printSoundsToString() const
+    {
+        std::vector<std::string> filePlayerLines, bufferPlayerLines;
+        for( const auto &sp : mSounds ) {
+            std::string line = "[" + sp.first + "] ";
+            // TODO: make a string representation of all files in vector, if there is more than one
+            if( sp.second.size() >= 1 ) {
+                auto player = sp.second.back();
+                line += "playing: " + std::string( player->isPlaying() ? "yes" : "no" );
+                line += ", volume: " + std::to_string( player->getVolume() );
+                line += ", pan: " + std::to_string( player->getPan() );
+
+                if( std::dynamic_pointer_cast<audio::FilePlayerNode>( player->getPlayerNode() ) ) {
+                    filePlayerLines.push_back( line );
+                }
+                else if( std::dynamic_pointer_cast<audio::BufferPlayerNode>( player->getPlayerNode() ) ) {
+                    bufferPlayerLines.push_back( line );
+                }
+                else {
+                    line = "(error, unexpected SamplePlayerNode type";
+                    bufferPlayerLines.push_back( line );
+                }
+            }
+
+        }
+
+        std::string result = "---- File Players: ----\n";
+        for( const auto &line : filePlayerLines ) {
+            result += line + "\n";
+        }
+
+        result += "---- Buffer Players: ----\n";
+        for( const auto &line : bufferPlayerLines ) {
+            result += line + "\n";
+        }
+
+        return result;
+    }
+
+
 }
