@@ -34,9 +34,12 @@
  *
  */
 
+#include "rph/SoundManager.h"
+
 #include "cinder/Rand.h"
 #include "cinder/Log.h"
-#include "rph/SoundManager.h"
+#include "cinder/audio/Context.h"
+#include "cinder/audio/Source.h"
 
 namespace rph {
     
@@ -59,7 +62,7 @@ namespace rph {
     {
         try {
             const float maxFramesForBufferPlayback = 44100 * 10; // TODO: provide getters and setters for this, or pass in via loadSound() options of some sort.
-            SoundPlayerRef sound = SoundPlayer::create(ci::app::loadAsset(path), maxFramesForBufferPlayback); // use next line instead for resources
+            SoundPlayerRef sound = SoundPlayer::create(ci::app::loadAsset(path), SoundPlayer::Options().maxFramesForBufferPlayback(maxFramesForBufferPlayback)); // use next line instead for resources
             //SoundPlayerRef sound = SoundPlayer::create(ci::app::loadResource(path));
             
             if (getNumSounds(key) == 0) mSounds[key] = { sound };
@@ -73,6 +76,53 @@ namespace rph {
         }
     }
     
+    void SoundManager::initBufferPlayerPool( size_t numBufferPlayers )
+    {
+        // TODO: do this without destroying current BufferPlayers
+        mBufferPlayerPool.clear(); // TODO: make sure these disconnect
+
+        for( size_t i = 0; i < numBufferPlayers; i++ ) {
+            auto sound = SoundPlayer::create( nullptr, SoundPlayer::Options().bufferPlayer( true ) );
+            mBufferPlayerPool.push_back( sound );
+        }
+
+        mNextAvailableBufferPlayerIndex = 0;
+    }
+
+    void SoundManager::loadBuffer( const std::string &key, const std::string &path )
+    {
+        try {
+            auto buffer = audio::load( ci::app::loadAsset( path ), audio::master()->getSampleRate() );
+            mSoundBuffers[key] = buffer->loadBuffer();
+        }
+        catch( std::exception &exc ) {
+            CI_LOG_EXCEPTION( "Failed to load sound with key: " << key << ", path: " << path, exc );
+        }
+    }
+
+    SoundPlayerRef SoundManager::getSoundFromPool( const std::string &key )
+    {
+        // grab BufferRef as iterator, if exists assign it to SoundPlayer's BufferPlayerNode
+        auto bufferIt = mSoundBuffers.find( key );
+        if( bufferIt == mSoundBuffers.end() )
+            return {};
+
+        if( mBufferPlayerPool.empty() ) {
+            CI_LOG_W( "empty pool, first use initBufferPlayerPool()" );
+            return {};
+        }
+
+        auto &soundPlayer = mBufferPlayerPool[mNextAvailableBufferPlayerIndex];
+        soundPlayer->setBuffer( bufferIt->second );
+
+        // increment index for the next available buffer player
+        mNextAvailableBufferPlayerIndex += 1;
+        if( mNextAvailableBufferPlayerIndex >= mBufferPlayerPool.size() )
+            mNextAvailableBufferPlayerIndex = 0;
+
+        return soundPlayer;
+    }
+
     SoundPlayerRef SoundManager::getSound( std::string key )
     {
         int numSounds = getNumSounds(key);

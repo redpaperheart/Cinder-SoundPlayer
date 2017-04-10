@@ -51,9 +51,25 @@ namespace rph {
     
     class SoundPlayer {
     public:
-        static SoundPlayerRef create(const DataSourceRef &source, size_t maxFramesForBufferPlayback = 20000);
+        struct Options {
+            //! Forces the SoundPlayer to use a BufferPlayerNode for playback. Good for sound effects.
+            Options& bufferPlayer( bool b ) { mForceUseBufferPlayer = b; return *this; }
+            //!
+            Options& maxFramesForBufferPlayback( size_t n )     { mMaxFramesForBufferPlayback = n; return *this; }
+            //! Configures FilePlayerNode to read its SourceFile on a background thread. Not applicable for Buffer playing
+            Options& asyncFileReading( bool b )                 { mAsyncFileReading = b; return *this; }
+        private:
+            size_t  mMaxFramesForBufferPlayback = 20000;
+            bool    mForceUseBufferPlayer = false;
+            bool    mAsyncFileReading = true;
+
+            friend class SoundPlayer;
+        };
+
+        //! If source is empty, initializes a SoundPlayer anyway, assign it's BufferRef or SourceRef later.
+        static SoundPlayerRef create(const DataSourceRef &source = nullptr, const Options &options = Options() );
         
-        SoundPlayer(const DataSourceRef &source, size_t maxFramesForBufferPlayback = 2000);
+        SoundPlayer(const DataSourceRef &source = nullptr, const Options &options = Options() );
         ~SoundPlayer() {};
 
         // playback
@@ -90,6 +106,9 @@ namespace rph {
         size_t getDurationFrames() const                        { return mPlayer->getNumFrames(); }
         
         SamplePlayerNodeRef getPlayerNode()                     { return mPlayer; }
+
+
+        void    setBuffer( const ci::audio::BufferRef &buffer );
         
     private:
         SamplePlayerNodeRef mPlayer;

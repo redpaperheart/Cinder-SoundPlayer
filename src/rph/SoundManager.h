@@ -49,8 +49,17 @@ namespace rph {
         SoundPlayerRef getSound( std::string key );
         int getNumSounds( std::string key );
 
+        //!
+        void            initBufferPlayerPool( size_t numBufferPlayers );
+        //!
+        void            loadBuffer( const std::string &key, const std::string &path );
+        //! Gets the next available SoundPlayer that is pre-configured to use BufferPlayerNode,
+        //! And assigns to it the BufferRef associated with \a key (use loadBuffer() for that).
+        SoundPlayerRef  getSoundFromPool( const std::string &key );
+
+
         std::string printSoundsToString() const;
-        
+
     protected:
         SoundManager(){};                                                    // Private so that it can  not be called
         SoundManager(SoundManager const&){};                                 // copy constructor is private
@@ -58,6 +67,10 @@ namespace rph {
         static SoundManager* mInstance;
 
         std::map<std::string, std::vector<SoundPlayerRef>>  mSounds;
+
+        std::vector<SoundPlayerRef>                     mBufferPlayerPool; // these are used with getSoundFromPool, they are all configured to use BufferPlayerNode
+        std::map<std::string, ci::audio::BufferRef>     mSoundBuffers;
+        size_t                                          mNextAvailableBufferPlayerIndex = 0;
     };
 }
 

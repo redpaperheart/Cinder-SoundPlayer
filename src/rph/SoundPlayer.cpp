@@ -37,32 +37,39 @@
 #include "SoundPlayer.h"
 #include "cinder/audio/Context.h"
 #include "cinder/audio/Source.h"
+#include "cinder/Log.h"
 
 namespace rph {
     
-    SoundPlayerRef SoundPlayer::create(const DataSourceRef &source, size_t maxFramesForBufferPlayback)
+    SoundPlayerRef SoundPlayer::create(const DataSourceRef &source, const Options &options)
     {
-        SoundPlayerRef ref(new SoundPlayer(source, maxFramesForBufferPlayback));
+        SoundPlayerRef ref(new SoundPlayer(source, options));
         return ref;
     }
 
-    SoundPlayer::SoundPlayer(const DataSourceRef &source, size_t maxFramesForBufferPlayback)
+    SoundPlayer::SoundPlayer(const DataSourceRef &source, const Options &options)
     {
         Context *ctx = Context::master();
-        SourceFileRef sourceFile = audio::load(source, ctx->getSampleRate());
         std::string label; 
+        SourceFileRef sourceFile;
+        if( source )
+            sourceFile = audio::load(source, ctx->getSampleRate());
 
         // Load source file in memory or stream from file depending on its size
-        if (sourceFile->getNumFrames() <= maxFramesForBufferPlayback) {
-            mPlayer = ctx->makeNode(new BufferPlayerNode(sourceFile->loadBuffer()));
+        if (options.mForceUseBufferPlayer || ( sourceFile && sourceFile->getNumFrames() <= options.mMaxFramesForBufferPlayback)) {
+            if(sourceFile)
+                mPlayer = ctx->makeNode(new BufferPlayerNode(sourceFile->loadBuffer()));
+            else
+                mPlayer = ctx->makeNode(new BufferPlayerNode);
+
             label += "BufferPlayerNode";
         }
         else {
-            mPlayer = ctx->makeNode(new FilePlayerNode(sourceFile));
+            mPlayer = ctx->makeNode(new FilePlayerNode(sourceFile, options.mAsyncFileReading));
             label += "FilePlayerNode";
         }
 
-        if( ! source->getFilePath().empty() )
+        if( source && ! source->getFilePath().empty() )
             label += " (" + source->getFilePath().filename().string() + ")"; // note: when the windows compiler is upgraded to v140, you'll have to remove the .string() here.
 
         mPlayer->setName( label );
@@ -119,4 +126,15 @@ namespace rph {
     {
         mPan->getParamPos()->applyRamp(from, to, seconds);
     }
+
+    void SoundPlayer::setBuffer( const ci::audio::BufferRef &buffer )
+    {
+        auto bufferPlayerNode = std::dynamic_pointer_cast<audio::BufferPlayerNode>( mPlayer );
+        if( bufferPlayerNode )
+            bufferPlayerNode->setBuffer( buffer );
+        else {
+            CI_LOG_W( "mPlayer not a BufferPlayerNode, can't set an audio::Buffer on it." );
+        }
+    }
+
 }
