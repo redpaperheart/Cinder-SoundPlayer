@@ -48,20 +48,20 @@ namespace rph {
 
     SoundPlayer::SoundPlayer(const DataSourceRef &source, size_t maxFramesForBufferPlayback)
     {
-        SourceFileRef sourceFile = audio::load(source);
-        Context *ctx = Context::master();
+        audio::SourceFileRef sourceFile = audio::load(source);
+        audio::Context *ctx = audio::Context::master();
         
         // Load source file in memory or stream from file depending on its size
         if (sourceFile->getNumFrames() <= maxFramesForBufferPlayback) {
-            mPlayer = ctx->makeNode(new BufferPlayerNode(sourceFile->loadBuffer()));
+            mPlayer = ctx->makeNode(new audio::BufferPlayerNode(sourceFile->loadBuffer()));
         }
         else {
-            mPlayer = ctx->makeNode(new FilePlayerNode(sourceFile));
+            mPlayer = ctx->makeNode(new audio::FilePlayerNode(sourceFile));
         }
         
         // Create gain and other nodes
-        mGain = ctx->makeNode(new GainNode());
-        mPan  = ctx->makeNode(new Pan2dNode());
+        mGain = ctx->makeNode(new audio::GainNode());
+        mPan  = ctx->makeNode(new audio::Pan2dNode());
         
         // Connect them to master and default speakers
         mPlayer >> mGain >> mPan >> ctx->getOutput();
@@ -90,7 +90,7 @@ namespace rph {
         
         // There's no thread safe callbacks from audio ramps yet, so we just hack it with timeline
         mStopTimer.stop();
-        cinder::app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(std::bind(&SoundPlayer::stop, this));
+        app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(std::bind(&SoundPlayer::stop, this));
     }
     
     void SoundPlayer::fadeOutAndPause(float seconds)
@@ -99,12 +99,12 @@ namespace rph {
         
         // There's no thread safe callbacks from audio ramps yet, so we just hack it with timeline
         mStopTimer.stop();
-        cinder::app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(std::bind(&SoundPlayer::pause, this));
+        app::timeline().apply(&mStopTimer, 0.0f, seconds).finishFn(std::bind(&SoundPlayer::pause, this));
     }
     
     void SoundPlayer::fade(float from, float to, float seconds, float delay)
     {
-        mGain->getParam()->applyRamp(from, to, seconds, Param::Options().delay(delay));
+        mGain->getParam()->applyRamp(from, to, seconds, audio::Param::Options().delay(delay));
     }
     
     void SoundPlayer::pan(float from, float to, float seconds)

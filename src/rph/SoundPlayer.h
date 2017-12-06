@@ -43,7 +43,6 @@
 #include "cinder/Timeline.h"
 
 using namespace ci;
-using namespace audio;
 
 namespace rph {
     
@@ -89,13 +88,13 @@ namespace rph {
         float getDuration() const                               { return mPlayer->getNumSeconds(); }
         size_t getDurationFrames() const                        { return mPlayer->getNumFrames(); }
         
-        SamplePlayerNodeRef getPlayerNode()                     { return mPlayer; }
+        audio::SamplePlayerNodeRef getPlayerNode()              { return mPlayer; }
         
     private:
-        SamplePlayerNodeRef mPlayer;
-        GainNodeRef			mGain;
-		Pan2dNodeRef		mPan;
-        Anim<float>         mStopTimer;
+        audio::SamplePlayerNodeRef  mPlayer;
+        audio::GainNodeRef			mGain;
+        audio::Pan2dNodeRef         mPan;
+        Anim<float>                 mStopTimer;
     };
 }
 
