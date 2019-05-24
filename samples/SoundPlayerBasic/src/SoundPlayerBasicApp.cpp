@@ -53,19 +53,19 @@ void SoundPlayerBasicApp::keyDown( KeyEvent event )
             else                     mSound->play();
             break;
         case KeyEvent::KEY_UP:
-            mVolume += 0.1; // we update this so it shows in params, but we dont need to
+            mVolume += 0.1f; // we update this so it shows in params, but we dont need to
             mSound->setVolume(mVolume);
             break;
         case KeyEvent::KEY_DOWN:
-            mVolume -= 0.1;
+            mVolume -= 0.1f;
             mSound->setVolume(mVolume);
             break;
         case KeyEvent::KEY_RIGHT:
-            mPan += 0.1;
+            mPan += 0.1f;
             mSound->setPan(mPan);
             break;
         case KeyEvent::KEY_LEFT:
-            mPan -= 0.1;
+            mPan -= 0.1f;
             mSound->setPan(mPan);
             break;
         default:
