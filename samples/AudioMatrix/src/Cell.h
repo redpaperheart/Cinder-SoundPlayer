@@ -9,8 +9,9 @@
 
 #pragma once
 
+#include "cinder/Color.h"
+
 using namespace ci;
-using namespace ci::app;
 using namespace std;
 
 class Cell {

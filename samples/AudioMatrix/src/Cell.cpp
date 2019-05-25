@@ -6,6 +6,9 @@
 //
 //
 
+#include "cinder/gl/gl.h"
+
+
 #include "Cell.h"
 
 ColorA Cell::sColorAudioOn = Color(1.0f, 153.0f/255.0f, 0.0f);
