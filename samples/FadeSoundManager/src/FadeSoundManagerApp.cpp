@@ -2,6 +2,8 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/params/Params.h"
 
+#include "cinder/gl/gl.h"
+
 #include "rph/SoundPlayer.h"
 #include "rph/SoundManager.h"
 
@@ -35,7 +37,7 @@ void FadeSoundManagerApp::setup()
     mSoundManager->loadSound(SOUND_JAZZ)->setLoop(true);
     mSoundManager->loadSound(SOUND_8BIT)->setLoop(true);
     mCurrentSongName = "";
-    mFadeTime = 4.0;
+    mFadeTime = 4.0f;
     
     // Create buttons for playback
     mParams = params::InterfaceGl::create("Loops", vec2(200, 160));

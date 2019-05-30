@@ -38,7 +38,7 @@ class AudioMatrixApp : public App {
     Rectf mGridRect;
     CueRef mCue;
     
-    Cell* mCurCell;
+    Cell* mCurCell = nullptr;
     Cell mGrid[6][4];
     std::map < int, std::vector<rph::SoundPlayerRef>> mSounds;
     
