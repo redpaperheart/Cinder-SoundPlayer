@@ -52,6 +52,8 @@ namespace rph {
     class SoundPlayer {
     public:
         struct Options {
+			Options () {};
+			~Options () {};
             //! Forces the SoundPlayer to use a BufferPlayerNode for playback. Good for sound effects.
             Options& bufferPlayer( bool b ) { mForceUseBufferPlayer = b; return *this; }
             //!
@@ -65,7 +67,7 @@ namespace rph {
 
             friend class SoundPlayer;
         };
-
+		
         //! If source is empty, initializes a SoundPlayer anyway, assign it's BufferRef or SourceRef later.
         static SoundPlayerRef create(const DataSourceRef &source = nullptr, const Options &options = Options() );
         
